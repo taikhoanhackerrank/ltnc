@@ -1,51 +1,29 @@
-#include <bits/stdc++.h>
-
+#include "bits/stdc++.h"
 using namespace std;
-#define ff(i, a, b) for(int i = a; i <= b; i++)
-#define Rep(i,a, b) for(int i = a; i >= b; i--)
-#define MP make_pair
-typedef long long ll;
-typedef pair<int, int> pi;
-const ll MAXN = 1e5 + 7;
-const ll base = 311;
-const ll INF = 1e9 + 7;
+#define ll long long
 
-ll F[MAXN];
+int main() {
+    int q; cin >> q;
+    while(q--) {
+        int n; cin >> n;
+        int a[n+1];
+        ll s[n+1] = {0};
 
-ll get(int l, int r)
-{
-    if (l == 0) return F[r];
-    return F[r] - F[l - 1];
-}
-
-void solve()
-{
-    int N; cin >> N;
-    ff(i, 1, N)
-    {
-        int x; cin >> x;
-        F[i] = F[i - 1] + x;
-    }
-    F[N + 1] = F[N];
-
-    ff(i, 1, N)
-    {
-        if (get(0, i - 1) == get(i + 1, N + 1))
-        {
-            cout << "YES\n";
-            return;
+        for(int i=1; i <= n; i++) {
+            cin >> a[i];
+            s[i] = s[i-1] + a[i];
         }
+        cout << endl;
+        int ok = 0;
+        for(int i=1; i <= n; i++) {
+            if(s[i-1] == (s[n] - s[i])) { // ve trai = ve phai khogn tinh ptu a[i]
+                cout << "YES\n";
+                ok = 1;
+                break;
+            }
+        }
+        
+        if(ok==0) cout << "NO\n";
     }
-    cout << "NO\n";
-}
-
-int main()
-{
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    // freopen("X.inp", "r", stdin);
-    // freopen("Y.out", "w", stdout);
-    int T; cin >> T;
-    F[0] = 0;
-    while(T--) solve();
     return 0;
 }
