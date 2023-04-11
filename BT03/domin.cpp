@@ -1,16 +1,6 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-#define ff(i, a, b) for(int i = a; i <= b; i++)
-#define Rep(i,a, b) for(int i = a; i >= int(b); i--)
-#define MP make_pair
-typedef long long ll;
-typedef pair<int, int> pi;
-const ll MAXN = 12;
-const ll base = 311;
-const ll INF = 1e9 + 7;
-char arr[MAXN][MAXN];
-int ans[MAXN][MAXN];
 int check(char x)
 {
     if (x == '.') return 0;
