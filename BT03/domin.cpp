@@ -1,45 +1,30 @@
-#include <bits/stdc++.h>
-
+#include "iostream"
 using namespace std;
-int check(char x)
-{
-    if (x == '.') return 0;
-    return 1;
-}
-int count_bomb(int i, int j)
-{
-    return check(arr[i - 1][j - 1]) + check(arr[i - 1][j]) + check(arr[i - 1][j + 1])
-            + check(arr[i][j - 1]) + check(arr[i][j + 1])
-            + check(arr[i + 1][j - 1]) + check(arr[i + 1][j]) + check(arr[i + 1][j + 1]);
-}
-void display(int N, int M)
-{
-    ff(i, 1, N)
-    {
-        ff(j, 1, M)
-        {
-            if (arr[i][j] == '*') cout << '*' << " ";
-            else cout << ans[i][j] << " ";
+
+int main() {
+    int m, n; cin >> m >> n;
+    char a[m][n];
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++) cin >> a[i][j];
+    }
+
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++){
+            if (a[i][j] == '*') cout << '*' << ' ';
+            else{
+                int cnt = 0;
+                if (a[i-1][j-1] == '*') cnt++;
+                if (a[i-1][j] == '*') cnt++;
+                if (a[i-1][j+1] == '*') cnt++;
+                if (a[i][j-1] == '*') cnt++;
+                if (a[i][j+1] == '*') cnt++;
+                if (a[i+1][j-1] == '*') cnt++;
+                if (a[i+1][j] == '*') cnt++;
+                if (a[i+1][j+1] == '*') cnt++;
+                cout << cnt << ' ';
+            }
         }
-        cout << "\n";
+        cout << '\n';
     }
-}
-void solve()
-{
-    int N, M; cin >> N >> M;
-    ff(i, 1, N) ff(j, 1, M) cin >> arr[i][j];
-
-    ff(i, 1, N)
-    {
-        ff(j, 1, M) ans[i][j] = count_bomb(i, j);
-    }
-    display(N, M);
-}
-
-int main()
-{
-    ios_base::sync_with_stdio(false); cin.tie(0);
-    ff(i, 0, MAXN - 1) ff(j, 0, MAXN - 1) arr[i][j] = '.', ans[i][j] = 0;
-    solve();
     return 0;
 }
